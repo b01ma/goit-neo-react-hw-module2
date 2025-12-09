@@ -1,16 +1,94 @@
-# React + Vite
+# Sip Happens Café - Customer Feedback App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application that collects and displays customer feedback for "Sip Happens Café" using an intuitive rating system.
 
-Currently, two official plugins are available:
+## 🎯 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Feedback Buttons**: Customers can rate their experience as Good, Neutral, or Bad
+- **Real-time Statistics**: Displays feedback counts and positive percentage
+- **Persistent Storage**: Feedback data is automatically saved to localStorage and restored on page reload
+- **Beautiful UI**: Modern gradient design with smooth animations and glass-morphism effects
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Reset Functionality**: Clear all feedback with a single click
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19**: UI library with hooks for state management
+- **Vite**: Lightning-fast build tool and dev server
+- **CSS Modules**: Component-scoped styling with no conflicts
+- **localStorage API**: Client-side persistent storage
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── App.jsx                    # Main component with state management
+├── index.css                  # Global styles
+├── main.jsx                   # Application entry point
+└── components/
+    ├── Options/               # Feedback button container
+    │   ├── Options.jsx
+    │   └── Options.module.css
+    ├── Feedback/              # Feedback statistics display
+    │   ├── Feedback.jsx
+    │   └── Feedback.module.css
+    └── Button/                # Reusable button component
+        ├── Button.jsx
+        └── Button.module.css
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+The app will be available at `http://localhost:5173`
+
+## 💡 Key Concepts
+
+### State Lifting
+State is managed in the `App` component and passed down to child components via props for proper data flow.
+
+### Persistent Storage
+- Initial state loads from localStorage using React state initializer functions
+- Data is automatically saved whenever feedback changes
+- Avoids cascading renders by not calling `setState` inside effects
+
+### Component Composition
+- **App**: Manages state and business logic
+- **Options**: Renders feedback buttons (presentational)
+- **Feedback**: Displays statistics (presentational)
+- **Button**: Reusable UI component
+
+## 📊 How It Works
+
+1. User clicks a feedback button (Good, Neutral, or Bad)
+2. The click handler updates the state in `App`
+3. `useEffect` automatically saves the new state to localStorage
+4. The `Feedback` component receives updated props and re-renders
+5. On page reload, state is restored from localStorage
+
+## 🎨 Design Features
+
+- Purple/blue gradient theme
+- Smooth hover animations on buttons
+- Glass-morphism effect on feedback cards
+- Full-width total count display
+- Responsive grid layout for statistics
