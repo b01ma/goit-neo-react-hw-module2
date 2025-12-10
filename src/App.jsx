@@ -1,32 +1,34 @@
+import "./index.css";
 import { useState, useEffect } from "react";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
-import "./index.css";
+import Notification from "./components/Notification/Notification";
+import Description from "./components/Description/Description";
 
 function App() {
     const [good, setGood] = useState(() => {
         const savedData = localStorage.getItem("feedbackData");
         if (savedData) {
             const parsedData = JSON.parse(savedData);
-            return parsedData.good || 0;
+            return parsedData.good || 0; // fallback to 0 if undefined
         }
-        return 0;
+        return 0; // default value
     });
     const [neutral, setNeutral] = useState(() => {
         const savedData = localStorage.getItem("feedbackData");
         if (savedData) {
             const parsedData = JSON.parse(savedData);
-            return parsedData.neutral || 0;
+            return parsedData.neutral || 0; // fallback to 0 if undefined
         }
-        return 0;
+        return 0; // default value
     });
     const [bad, setBad] = useState(() => {
         const savedData = localStorage.getItem("feedbackData");
         if (savedData) {
             const parsedData = JSON.parse(savedData);
-            return parsedData.bad || 0;
+            return parsedData.bad || 0; // fallback to 0 if undefined
         }
-        return 0;
+        return 0; // default value
     });
 
     useEffect(() => {
@@ -54,15 +56,12 @@ function App() {
 
     return (
         <div>
-            <h1 className="title">Sip Happens Café</h1>
-            <p className="description">
-                Please leave your feedback about our service by selecting one of the options below.
-            </p>
-            <Options onFeedback={handleFeedback} onReset={handleReset} />
+            <Description />
+            <Options onFeedback={handleFeedback} onReset={handleReset} isResetVisible={total > 0} />
             {total > 0 ? (
                 <Feedback good={good} neutral={neutral} bad={bad} />
             ) : (
-                <p className="no-feedback">No feedback given</p>
+                <Notification>No feedback given</Notification>
             )}
         </div>
     );
